@@ -1,8 +1,10 @@
 import random
 x = 0
 y = 0
-car_move_x = 100
-car_move_y = 100
+car_move_x = 420
+car_move_y = 430
+keys_pressed = [False for key_code in range(256)]
+
 def setup():
     size(640,480)
     
@@ -29,7 +31,7 @@ def shrubs():
         fill(0,128,0)
         ellipse(640,i+x,50,50)
         fill(50,205,50)
-        ellipse(620,i+x,40,40)
+        ellipse(620,i+x,100,100)
     if x >= 600:
         x = -200
         
@@ -44,18 +46,25 @@ def yellow_lines():
     if x >= 600:
         x = -200
     x += 10
-    
-def controls():
+
+def car():
     global car_move_x
     global car_move_y
-    if keyPressed and key == "w":
-        car_move_y += -8
-    elif keyPressed and key == 's':
-        car_move_y += 8
-    elif keyPressed and key == 'a':
-        car_move_x += -8
-    elif keyPressed and key == 'd':
-        car_move_x += 8
+    fill (200, 0, 0)
+    rect(car_move_x,car_move_y,40,60)
+    fill(0)
+    rect(car_move_x, car_move_y,10,15)
+    if car_move_x <= 100:
+        car_move_x == 279
+    
+    
+def keyPressed():
+    global keys_pressed
+    keys_pressed[keyCode] = True
+    
+def keyReleased():
+    global keys_pressed
+    keys_pressed[keyCode] = False
 
     
 def draw():
@@ -67,7 +76,7 @@ def draw():
     road()
     shrubs()
     yellow_lines()
-    controls()
+    car()
     fill(0)
     ellipse(350, 0+y, 25, 25)
     ellipse(310, 150+y, 25, 25)
@@ -76,12 +85,30 @@ def draw():
     if y >= 600:
         y = -500
     y += 10
-    
+
+    if keys_pressed[37]:
+        if car_move_x <= 280:
+            car_move_x -= 0
+        else:
+            car_move_x -= 5
+    if keys_pressed[38]:
+        if car_move_y <= 0:
+            car_move_y -= 0
+        else:
+            car_move_y -= 5
+    if keys_pressed[39]:
+        if car_move_x >= 538:
+            car_move_x += 0
+        else:
+            car_move_x += 5
+    if keys_pressed[40]:
+        if car_move_y >= 420:
+            car_move_x += 0
+        else:
+            car_move_y += 5
+            
     fill(101, 67, 33)
     rect(100,100,30,60)
     
     fill(0,100,0)
     triangle(87,111,117, 55, 143, 111)
-    
-    fill (200, 0, 0)
-    rect(car_move_x,car_move_y,40,60)
