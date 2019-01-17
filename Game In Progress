@@ -1,6 +1,8 @@
 import random
 x = 0
 y = 0
+time = 0
+countdown = 5
 car_move_x = 420
 car_move_y = 430
 keys_pressed = [False for key_code in range(256)]
@@ -21,19 +23,20 @@ def road():
     rect(380+100,0,50,height)
     fill(115,115,115)
     rect(380+150,0,50,height)
-    
 
-def shrubs():
+def ocean():
     global x
     for i in range (-600, 750, 80):
-        fill(34,139,34)
-        ellipse(600,i+x,50,50)
-        fill(0,128,0)
-        ellipse(640,i+x,50,50)
-        fill(50,205,50)
-        ellipse(620,i+x,100,100)
-    if x >= 600:
-        x = -200
+        fill(30,144,255)
+        rect(580,i+x,100,100)
+        fill(170,170,170)
+        rect(582,i+x,6,90)
+        fill(211,211,211)
+        rect(580,i+x,10,50)
+        fill(170,170,170)
+        rect(272,i+x,6,90)
+        fill(211,211,211)
+        rect(270,i+x,10,50)
         
         
     
@@ -50,12 +53,36 @@ def yellow_lines():
 def car():
     global car_move_x
     global car_move_y
+    fill(0)
+    rect(car_move_x-3, car_move_y+3,5,15)
+    fill(0)
+    rect(car_move_x+37, car_move_y+3,5,15)
+    fill(0)
+    rect(car_move_x-3, car_move_y+40,5,15)
+    fill(0)
+    rect(car_move_x+37, car_move_y+40,5,15)
     fill (200, 0, 0)
     rect(car_move_x,car_move_y,40,60)
-    fill(0)
-    rect(car_move_x, car_move_y,10,15)
+    fill (150, 0, 0)
+    rect(car_move_x, car_move_y+20,40,30)
     if car_move_x <= 100:
         car_move_x == 279
+    
+        
+    
+
+def timer():
+    global time
+    if frameCount % 60 == 0 and countdown <= 0:
+        time += 1
+    fill(0)
+    rect (408,4,50,20)
+    fill(255)
+    textSize(20)
+    textAlign(CENTER, CENTER)
+    text("{}:{}{}".format(time // 60, time % 60 // 10, time % 10), 433, 10)
+
+
     
     
 def keyPressed():
@@ -74,9 +101,11 @@ def draw():
     global car_move_x
     global car_move_y
     road()
-    shrubs()
     yellow_lines()
     car()
+    ocean()
+    timer()
+    countdown()
     fill(0)
     ellipse(350, 0+y, 25, 25)
     ellipse(310, 150+y, 25, 25)
