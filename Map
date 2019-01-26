@@ -1,0 +1,40 @@
+import random
+x = 0
+y = 0
+def setup():
+    size(640,480)
+
+def road():
+    fill(128,128,128)
+    rect(280,0,300,height)
+
+def yellow_lines():
+    global x   
+    fill(255, 174, 66)
+    for i in range (-600, 750, 80):
+        rect(420,i+x,20,60)
+    if x >= 600:
+        x = -200
+    x += 10
+
+
+def draw():
+    background(124, 252, 0)
+    noStroke()
+    global y
+    road()
+    yellow_lines()
+    fill(0)
+    ellipse(350, 0+y, 25, 25)
+    ellipse(310, 150+y, 25, 25)
+    ellipse(380, 300+y, 25, 25)
+    ellipse(330, 450+y, 25, 25)
+    if y >= 600:
+        y = -500
+    y += 10
+
+    fill(101, 67, 33)
+    rect(100,100,30,60)
+
+    fill(0,100,0)
+    triangle(87,111,117, 55, 143, 111)
