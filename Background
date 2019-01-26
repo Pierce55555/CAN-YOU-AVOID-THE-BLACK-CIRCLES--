@@ -23,15 +23,17 @@ def road():
     rect(380+150,0,50,height)
 
 
-def shrubs():
+def ocean():
     global x
     for i in range (-600, 750, 80):
-        fill(34,139,34)
-        ellipse(600,i+x,50,50)
-        fill(0,128,0)
-        ellipse(640,i+x,50,50)
-        fill(50,205,50)
-        ellipse(620,i+x,100,100)
+        fill(30,144,255)
+        rect(580,i+x,100,100)
+        fill(170,170,170)
+        rect(582,i+x,6,90)
+        fill(211,211,211)
+        rect(580,i+x,10,50)
+
+
     if x >= 600:
         x = -200
 
@@ -50,10 +52,18 @@ def yellow_lines():
 def car():
     global car_move_x
     global car_move_y
+    fill(0)
+    rect(car_move_x-3, car_move_y+3,5,15)
+    fill(0)
+    rect(car_move_x+37, car_move_y+3,5,15)
+    fill(0)
+    rect(car_move_x-3, car_move_y+40,5,15)
+    fill(0)
+    rect(car_move_x+37, car_move_y+40,5,15)
     fill (200, 0, 0)
     rect(car_move_x,car_move_y,40,60)
-    fill(0)
-    rect(car_move_x, car_move_y,10,15)
+    fill (150, 0, 0)
+    rect(car_move_x, car_move_y+20,40,30)
     if car_move_x <= 100:
         car_move_x == 279
 
@@ -74,9 +84,9 @@ def draw():
     global car_move_x
     global car_move_y
     road()
-    shrubs()
     yellow_lines()
     car()
+    ocean()
     fill(0)
     ellipse(350, 0+y, 25, 25)
     ellipse(310, 150+y, 25, 25)
@@ -87,7 +97,7 @@ def draw():
     y += 10
 
     if keys_pressed[37]:
-        if car_move_x <= 280 and car_move_y > -60 and car_move_y < 490:
+        if car_move_x <= 282 and car_move_y > -60 and car_move_y < 490:
             car_move_x -= 0
         else:
             car_move_x -= 5
